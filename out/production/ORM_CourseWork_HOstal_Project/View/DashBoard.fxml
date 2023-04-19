@@ -49,11 +49,6 @@
             <Font name="System Bold" size="37.0" />
          </font>
       </Button>
-      <Button fx:id="btnLeft" layoutX="567.0" layoutY="731.0" mnemonicParsing="false" onAction="#btnOnActionleftRoom" prefHeight="56.0" prefWidth="376.0" style="-fx-background-color: #95a5a6;" text="LEFT ROOM" textFill="#f01f7f">
-         <font>
-            <Font name="System Bold" size="37.0" />
-         </font>
-      </Button>
       <Separator layoutX="171.0" layoutY="118.0" prefHeight="11.0" prefWidth="642.0" />
       <Button layoutX="713.0" layoutY="473.0" mnemonicParsing="false" onAction="#btnOnActionRoom_Details" prefHeight="54.0" prefWidth="257.0" style="-fx-background-radius: 80; -fx-background-color: #1abc9c;" text="Room_Details" textFill="#e13737">
          <font>

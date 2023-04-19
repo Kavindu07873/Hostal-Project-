@@ -51,7 +51,6 @@ public class RoomDaoImpl implements RoomDao {
     public List<Rooms> loadAll() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-
         String hql= " From Rooms";
         Query query = session.createQuery(hql);
         List<Rooms> list = (List<Rooms>) ((org.hibernate.query.Query<?>) query).list();
