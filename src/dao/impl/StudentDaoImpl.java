@@ -1,7 +1,8 @@
-package dao;
+package dao.impl;
 
 import Entity.Student;
 import Utill.FactoryConfiguration;
+import dao.StudentDao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

@@ -3,7 +3,7 @@ package Controllers;
 import Entity.Student;
 import TM.StudentTM;
 import Utill.FactoryConfiguration;
-import bo.StudentBOImpl;
+import bo.impl.StudentBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

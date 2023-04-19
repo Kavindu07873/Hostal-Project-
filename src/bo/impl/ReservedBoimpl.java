@@ -1,15 +1,16 @@
-package bo;
+package bo.impl;
 
 import Entity.Reserved;
-import dao.ReservedDaoImpl;
+import bo.ReservedBo;
+import dao.impl.ReservedDaoImpl;
 
 import java.sql.SQLException;
 
-public class ReservedBoimpl implements  ReservedBo {
+public class ReservedBoimpl implements ReservedBo {
     ReservedDaoImpl reservedDao = new ReservedDaoImpl();
     @Override
     public boolean saveReserved(Reserved reserved) throws SQLException, ClassNotFoundException {
-        System.out.println("mkd lede");
+
            return   reservedDao.save(reserved);
     }
 }

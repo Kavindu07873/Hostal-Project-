@@ -106,7 +106,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="txtAvailable" layoutX="313.0" layoutY="512.0" prefHeight="44.0" prefWidth="257.0">
+      <TextField fx:id="txtAvailable" layoutX="313.0" layoutY="512.0" prefHeight="44.0" prefWidth="257.0" promptText="Availability">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>

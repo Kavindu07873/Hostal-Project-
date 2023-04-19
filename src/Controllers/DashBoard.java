@@ -1,10 +1,10 @@
 package Controllers;
 
 import Entity.Reserved;
-import bo.ReservedBoimpl;
-import dao.ReservedDaoImpl;
-import dao.RoomDaoImpl;
-import dao.StudentDaoImpl;
+import bo.impl.ReservedBoimpl;
+import dao.impl.ReservedDaoImpl;
+import dao.impl.RoomDaoImpl;
+import dao.impl.StudentDaoImpl;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -29,7 +29,7 @@ public class DashBoard {
     public TextField texts;
     public TextField txtids;
     ReservedDaoImpl reservedDao = new ReservedDaoImpl();
-    ReservedBoimpl reservedBoimpl= new ReservedBoimpl();
+    ReservedBoimpl reservedBoimpl = new ReservedBoimpl();
 
     public TextField txtRoomNo;
     public TextField txtDate;
@@ -92,13 +92,13 @@ public class DashBoard {
         }));
     }
 
-    private void setRoomDetails(String selectRoomtype)throws SQLException ,ClassNotFoundException {
+    private void setRoomDetails(String selectRoomtype) throws SQLException, ClassNotFoundException {
         List R = RoomDaoImpl.getRoomDetails(selectRoomtype);
 
         if (R != null) {
             System.out.println("Addddddddddddddd");
             System.out.println(R);
-              txtAvailable.setText(String.valueOf(R));
+            txtAvailable.setText(String.valueOf(R));
         } else {
             new Alert(Alert.AlertType.WARNING, "Empty Result").show();
         }
@@ -107,25 +107,23 @@ public class DashBoard {
     private void setRoomIds() {
 
         ObservableList<String> roomObList;
+
         try {
-            roomObList = FXCollections.observableArrayList(
-                    roomDao.getRoomIds()
+            roomObList = FXCollections.observableArrayList(roomDao.getRoomIds());
+//            if (txtAvailable.getText().equals("[Available]")) {
+            txtids.setText(String.valueOf(roomObList));
 
-            );
-            if(txtAvailable.getText().equals("[Available]")){
-                txtids.setText(String.valueOf(roomObList));
-
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     private void setStudentDetails(String selectedStudentId) {
-        List S = StudentDaoImpl.getStudentDetails(selectedStudentId);
+        List<String> S = StudentDaoImpl.getStudentDetails(selectedStudentId);
+
         if (S != null) {
-            System.out.println(S);
-            txtStuName.setText(String.valueOf(S));
+            System.out.println(S + "\b");
+            txtStuName.setText(String.valueOf(S + "\b"));
 
         } else {
             new Alert(Alert.AlertType.WARNING, "Empty Result").show();
@@ -134,13 +132,11 @@ public class DashBoard {
 
     private void setStudentId() {
         try {
-            ObservableList<String> stuidObList;
-
-            stuidObList = FXCollections.observableArrayList(
-                    studentDao.getStudentIds()
-            );
-
+            ObservableList<String> stuidObList = FXCollections.observableArrayList(studentDao.getStudentIds());
             cmbStu_id.setItems(stuidObList);
+            System.out.println(stuidObList);
+//            System.out.println(stuidObList.stream().sorted());
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -184,39 +180,24 @@ public class DashBoard {
     }
 
     public void btnOnActionReservedRoom(ActionEvent actionEvent) {
-//txtAvailable.clear();
-//        String newVersion;
-//        if(set.next()){
-//            String version = set.getString(1);
-//            int a = version.length();
-//
-//            int i = (Integer.parseInt(version.substring(1,a))+1);
-//            if (i==100){
-//                newVersion = "S"+i;
-//            }else {
-//                newVersion = "S0"+i;
-//            }
-//        }else {
-//            newVersion = "S01";
-//        }
-    String Stu_id =(String) cmbStu_id.getValue();
-//    String Stu_Name = txtStuName.getText();
-    String Room_type = (String) cmbRoomType.getValue();
-    String Room_No = txtRoomNo.getText();
-    String status = txtAvailable.getText();
-    double price = Double.parseDouble(txtPrice.getText());
-    String reserved_id = "R1" ;
+        String Stu_id = (String) cmbStu_id.getValue();
+        String Stu_Name = txtStuName.getText();
+        String Room_Type = (String) cmbRoomType.getValue();
+        String Room_No = txtRoomNo.getText();
+        String Date = txtAvailable.getText();
+        double Price = Double.parseDouble(txtPrice.getText());
+        String Reserved_id = txtids.getText();
 
+//        if(txtRoomNo.getText().equals())
         try {
-            if(reservedBoimpl.saveReserved(
+            if (reservedBoimpl.saveReserved(
                     new Reserved(
-                           Stu_id,Room_type,status,price,reserved_id,Room_No
+                            Reserved_id,Room_No,Stu_id,Stu_Name,Room_Type,Price,Date
                     )
-            )){
+            ) ) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved").showAndWait();
 
-            }
-            else {
+            } else {
                 System.out.println("ane  mnda");
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -224,7 +205,6 @@ public class DashBoard {
         }
 
 
-     //   txtRoomNo.clear();
     }
 
     private void genarateRoomNo(String w) {
@@ -238,7 +218,10 @@ public class DashBoard {
         }
     }
 
-    public void btnOnActionRoom_Details(ActionEvent actionEvent) {
+    public void btnOnActionRoom_Details(ActionEvent actionEvent) throws IOException {
+        this.root.getChildren().clear();
+        this.root.getChildren().add(FXMLLoader.load(this.getClass().getResource("../view/RoomDetails.fxml")));
+
     }
 
     public void btnOnActionleftRoom(ActionEvent actionEvent) {
@@ -249,75 +232,74 @@ public class DashBoard {
         if (cmbRoomType.getSelectionModel().getSelectedItem().equals("RM-1324(Non-Ac)")) {
             txtPrice.setText("3100");
             btnReserved.setDisable(true);
-          //  texts.setText("[R001]");
-            Random r=new Random();
-             //35Rooms
-                for (int i = 0; i<35;i++){
-                    int rand= r.nextInt(35);
-                    System.out.println("rand      "+rand);
-                    txtRoomNo.setText(String.valueOf("N"+rand));
-                            i++;
-           //          txtAvailable.setText("Ok");
-                    btnReserved.setDisable(false);
-                }
-
-
+            //  texts.setText("[R001]");
+            Random r = new Random();
+            //35Rooms
+            for (int i = 0; i < 35; i++) {
+                int rand = r.nextInt(35);
+                System.out.println("rand      " + rand);
+                txtRoomNo.setText(String.valueOf("N" + rand));
+                i++;
+                //          txtAvailable.setText("Ok");
+                btnReserved.setDisable(false);
             }
 
+
+        }
 
 
         if (cmbRoomType.getSelectionModel().getSelectedItem().equals("RM-5467(Non-Ac/Food)")) {
             txtPrice.setText("6500");
-     //       texts.setText("R001");
+            //       texts.setText("R001");
 
-            Random r=new Random();
+            Random r = new Random();
 
             btnReserved.setDisable(true);
 
-            for (int i = 0; i<20;i++){
-             //   System.out.println(i);
-                int rand= r.nextInt(20);
+            for (int i = 0; i < 20; i++) {
+                //   System.out.println(i);
+                int rand = r.nextInt(20);
 
-                txtRoomNo.setText(String.valueOf("NF"+rand));
-         //       txtAvailable.setText("NOT Available");
+                txtRoomNo.setText(String.valueOf("NF" + rand));
+                //       txtAvailable.setText("NOT Available");
                 btnReserved.setDisable(false);
             }
 
 
-
-        } if (cmbRoomType.getSelectionModel().getSelectedItem().equals("RM-7896(Ac)")) {
+        }
+        if (cmbRoomType.getSelectionModel().getSelectedItem().equals("RM-7896(Ac)")) {
             txtPrice.setText("8100");
-        //    texts.setText("R001");
+            //    texts.setText("R001");
 
-            Random r=new Random();
+            Random r = new Random();
             btnReserved.setDisable(true);
 
-            for (int i = 0; i<14;i++){
-           //     System.out.println(i);
-                int rand= r.nextInt(14);
+            for (int i = 0; i < 14; i++) {
+                //     System.out.println(i);
+                int rand = r.nextInt(14);
 
-             txtRoomNo.setText(String.valueOf("A"+rand));
+                txtRoomNo.setText(String.valueOf("A" + rand));
 
-              //  txtAvailable.setText("NOT Available");
+                //  txtAvailable.setText("NOT Available");
                 btnReserved.setDisable(false);
             }
 
 
-
-        } if (cmbRoomType.getSelectionModel().getSelectedItem().equals("RM-0093(Ac/Food)")) {
+        }
+        if (cmbRoomType.getSelectionModel().getSelectedItem().equals("RM-0093(Ac/Food)")) {
             txtPrice.setText("16000");
-       //     txtids.setText("R001");
+            //     txtids.setText("R001");
 
-            Random r=new Random();
+            Random r = new Random();
 
             btnReserved.setDisable(true);
 
-            for (int i = 0; i<10;i++){
-              //  System.out.println(i);
-                int rand= r.nextInt(10);
-              txtRoomNo.setText(String.valueOf("AF"+rand));
+            for (int i = 0; i < 10; i++) {
+                //  System.out.println(i);
+                int rand = r.nextInt(10);
+                txtRoomNo.setText(String.valueOf("AF" + rand));
 
-          //      txtAvailable.setText("NOT Available");
+                //      txtAvailable.setText("NOT Available");
                 btnReserved.setDisable(false);
             }
         }

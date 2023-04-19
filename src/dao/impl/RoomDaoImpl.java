@@ -1,8 +1,9 @@
-package dao;
+package dao.impl;
 
 import Entity.Rooms;
 import Entity.Student;
 import Utill.FactoryConfiguration;
+import dao.RoomDao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

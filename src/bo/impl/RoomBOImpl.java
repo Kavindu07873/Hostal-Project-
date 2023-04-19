@@ -1,12 +1,13 @@
-package bo;
+package bo.impl;
 
 import Entity.Rooms;
-import dao.RoomDaoImpl;
+import bo.RoomBo;
+import dao.impl.RoomDaoImpl;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class RoomBOImpl implements RoomBo{
+public class RoomBOImpl implements RoomBo {
     RoomDaoImpl roomDao =  new RoomDaoImpl();
   @Override
     public List<Rooms> getAllRooms()throws SQLException ,ClassNotFoundException{

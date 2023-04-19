@@ -1,8 +1,9 @@
-package bo;
+package bo.impl;
 
 import Entity.Student;
+import bo.StudentBo;
 import dao.StudentDao;
-import dao.StudentDaoImpl;
+import dao.impl.StudentDaoImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
