@@ -48,6 +48,7 @@
             <TableColumn fx:id="colRoomType" minWidth="0.0" prefWidth="145.0" text="RoomType" />
             <TableColumn fx:id="colDate" prefWidth="125.0" text="Date" />
             <TableColumn fx:id="colRoomPrice" prefWidth="125.0" text="Room Price" />
+            <TableColumn fx:id="status" prefWidth="74.0" text="status" />
          </columns>
       </TableView>
       <JFXTextField fx:id="txtStudentId" labelFloat="true" layoutX="56.0" layoutY="186.0" prefHeight="31.0" prefWidth="328.0" promptText="Student Id :" unFocusColor="#2f2d2d">

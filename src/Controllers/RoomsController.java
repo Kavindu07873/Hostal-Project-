@@ -144,7 +144,6 @@ try(Rooms resultset = session.get(Rooms.class,txtRoomNo.getText())) {
     public void btnOnActionDelete(ActionEvent actionEvent) {
         String No = txtRoomNo.getText();
         tblRoom.refresh();
-
         try {
             if(roomBO.deleteStudent(No)){
                 new Alert(Alert.AlertType.CONFIRMATION,"Deleted!..").showAndWait();

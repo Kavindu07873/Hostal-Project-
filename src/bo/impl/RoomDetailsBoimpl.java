@@ -17,4 +17,8 @@ public class RoomDetailsBoimpl implements RoomDetailsBo {
         return roomDetailsDaoimpl.loadAll();
     }
 
+    @Override
+    public boolean deleteStudent(String no) throws Exception {
+        return roomDetailsDaoimpl.delete(no);
+    }
 }

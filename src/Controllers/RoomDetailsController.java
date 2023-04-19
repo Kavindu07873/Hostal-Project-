@@ -41,8 +41,11 @@ public class RoomDetailsController {
     public JFXTextField txtReceivedId;
     public JFXTextField txtDate;
     public TableView tblRoomDetails;
+    public TableColumn status;
     RoomDetailsBoimpl roomDetailsBoimpl = new RoomDetailsBoimpl();
-    public void initialize(){
+
+
+    public void initialize() {
         colReceived.setCellValueFactory(new PropertyValueFactory("Reserved_id"));
         ColStudentId.setCellValueFactory(new PropertyValueFactory("Stu_id"));
         colStudentName.setCellValueFactory(new PropertyValueFactory("Stu_Name"));
@@ -52,12 +55,41 @@ public class RoomDetailsController {
         colRoomPrice.setCellValueFactory(new PropertyValueFactory("Price"));
 
         loadAllRoomsDetails();
+
+        tblRoomDetails.getSelectionModel().selectedItemProperty()
+                .addListener((observable, OldValue, newValue) -> {
+                    setData((ReservedTM) newValue);
+                });
+
+    }
+
+    private void setData(ReservedTM tm) {
+        txtDate.setText(tm.getDate());
+        txtReceivedId.setText(tm.getReserved_id());
+        txtRoomNo.setText(tm.getRoom_No());
+        txtStudentId.setText(tm.getStu_id());
+        txtStudentName.setText(tm.getStu_Name());
+//        txtRoomPrice.setText(tm.getPrice());
+        txtRoomType.setText(tm.getRoom_Type());
     }
 
 
     public void btnLeftRoomDetails(ActionEvent actionEvent) {
+            String No = txtReceivedId.getText();
+            tblRoomDetails.refresh();
 
+        try {
+            if(roomDetailsBoimpl.deleteStudent(No)){
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!..").showAndWait();
+            }else {
+                new Alert(Alert.AlertType.WARNING,"Not").showAndWait();
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        loadAllRoomsDetails();
     }
 
     public void btnOnActionBack(ActionEvent actionEvent) throws IOException {
@@ -71,40 +103,24 @@ public class RoomDetailsController {
 
         try {
             List<Reserved> allReserved = roomDetailsBoimpl.getAllRoomsDetails();
-//            Button btn = new Button("Available");
             for (Reserved reserved : allReserved
             ) {
                 tblRoomDetails.getItems().add(
                         new ReservedTM(
-                             reserved.getReserved_id(),
+                                reserved.getReserved_id(),
                                 reserved.getRoom_No(),
                                 reserved.getStu_id(),
                                 reserved.getStu_Name(),
                                 reserved.getRoom_Type(),
                                 reserved.getPrice(),
                                 reserved.getDate()
-                                )
-
+                        )
                 );
-
-//                btn.setOnAction((e)->{
-//
-//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-//
-//                            "Are You Sure?"
-//                            , ButtonType.YES,ButtonType.NO);
-//                    Optional<ButtonType> buttonType = alert.showAndWait();
-//                    if(buttonType.get().equals(ButtonType.YES)) {
-//
-//                    }
-//                });
-
-
-
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
 
 }

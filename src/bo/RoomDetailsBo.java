@@ -9,4 +9,6 @@ public interface RoomDetailsBo {
 
 
     List<Reserved> getAllRoomsDetails()throws SQLException,ClassNotFoundException;
+
+    boolean deleteStudent(String no) throws Exception;
 }

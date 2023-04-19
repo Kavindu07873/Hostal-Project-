@@ -34,7 +34,16 @@ public class RoomDetailsDaoimpl implements RoomDetailsDao {
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Reserved Reserved = session.load(Reserved.class, s);
+
+        session.delete(Reserved);
+
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
