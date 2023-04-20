@@ -6,4 +6,6 @@ import java.sql.SQLException;
 
 public interface ReservedBo {
     boolean saveReserved(Reserved reserved) throws SQLException, ClassNotFoundException;
+
+//    String generateNewReservationID();
 }

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Entity.Reserved;
+import bo.ReservedBo;
 import bo.impl.ReservedBoimpl;
 import dao.impl.ReservedDaoImpl;
 import dao.impl.RoomDaoImpl;
@@ -18,11 +19,9 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -104,6 +103,9 @@ public class DashBoard {
         } else {
             new Alert(Alert.AlertType.WARNING, "Empty Result").show();
         }
+       generateNewReservationID();
+
+        txtids.setText(generateNewReservationID());
     }
 
     private void setRoomIds() {
@@ -118,6 +120,8 @@ public class DashBoard {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 
     private void setStudentDetails(String selectedStudentId) {
@@ -188,7 +192,9 @@ public class DashBoard {
         String Room_No = txtRoomNo.getText();
         String Date = lblDate.getText();
         double Price = Double.parseDouble(txtPrice.getText());
-        String Reserved_id = txtids.getText();
+        String Reserved_id = generateNewReservationID();
+
+        System.out.println(generateNewReservationID());
 
 //        if(txtRoomNo.getText().equals())
         try {
@@ -207,6 +213,9 @@ public class DashBoard {
         }
 
 
+    }
+    public String generateNewReservationID() {
+        return ReservedBoimpl.generateNewReservationID();
     }
 
     private void genarateRoomNo(String w) {
