@@ -18,9 +18,11 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -96,9 +98,9 @@ public class DashBoard {
         List R = RoomDaoImpl.getRoomDetails(selectRoomtype);
 
         if (R != null) {
-            System.out.println("Addddddddddddddd");
-            System.out.println(R);
-            txtAvailable.setText(String.valueOf(R));
+//            System.out.println("Addddddddddddddd");
+            System.out.println("R =  "+R);
+//            txtAvailable.setText(String.valueOf(R));
         } else {
             new Alert(Alert.AlertType.WARNING, "Empty Result").show();
         }
@@ -111,7 +113,7 @@ public class DashBoard {
         try {
             roomObList = FXCollections.observableArrayList(roomDao.getRoomIds());
 //            if (txtAvailable.getText().equals("[Available]")) {
-            txtids.setText(String.valueOf(roomObList));
+//            txtids.setText(String.valueOf(roomObList));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -184,7 +186,7 @@ public class DashBoard {
         String Stu_Name = txtStuName.getText();
         String Room_Type = (String) cmbRoomType.getValue();
         String Room_No = txtRoomNo.getText();
-        String Date = txtAvailable.getText();
+        String Date = lblDate.getText();
         double Price = Double.parseDouble(txtPrice.getText());
         String Reserved_id = txtids.getText();
 

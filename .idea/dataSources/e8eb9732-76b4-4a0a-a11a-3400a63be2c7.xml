@@ -1036,85 +1036,49 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="305" parent="11" name="reserved"/>
-    <table id="306" parent="11" name="rooms"/>
-    <table id="307" parent="11" name="student"/>
-    <column id="308" parent="305" name="Reserved_id">
+    <table id="305" parent="11" name="rooms"/>
+    <table id="306" parent="11" name="student"/>
+    <column id="307" parent="305" name="Type_Id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="309" parent="305" name="Date">
+    <column id="308" parent="305" name="Description">
       <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="309" parent="305" name="KyMoney">
+      <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
     <column id="310" parent="305" name="Price">
-      <Position>3</Position>
-      <DataType>double|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="311" parent="305" name="Room_No">
-      <Position>4</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="312" parent="305" name="Room_Type">
-      <Position>5</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="313" parent="305" name="Stu_Name">
-      <Position>6</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="314" parent="305" name="Stu_id">
-      <Position>7</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <key id="315" parent="305" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>Reserved_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="316" parent="306" name="Type_Id">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="317" parent="306" name="Description">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="318" parent="306" name="KyMoney">
-      <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="319" parent="306" name="Price">
       <Position>4</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="320" parent="306" name="Room_type">
+    <column id="311" parent="305" name="Room_type">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="321" parent="306" name="PRIMARY">
+    <key id="312" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Type_Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="322" parent="307" name="Stu_Id">
+    <column id="313" parent="306" name="Stu_Id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="323" parent="307" name="Address">
+    <column id="314" parent="306" name="Address">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="324" parent="307" name="NAME">
+    <column id="315" parent="306" name="NAME">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="325" parent="307" name="PRIMARY">
+    <key id="316" parent="306" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Stu_Id</ColNames>
       <Primary>1</Primary>

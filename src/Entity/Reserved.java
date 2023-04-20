@@ -2,6 +2,7 @@ package Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Reserved implements SuperEntity {
@@ -18,7 +19,6 @@ public class Reserved implements SuperEntity {
     }
 
     public Reserved(String reserved_id, String room_No, String stu_id, String stu_Name, String room_Type, double price, String date) {
-
         Reserved_id = reserved_id;
         Room_No = room_No;
         Stu_id = stu_id;
